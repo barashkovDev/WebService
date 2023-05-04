@@ -62,4 +62,15 @@ public class Post {
     public void setViews(int views) {
         this.views = views;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", anons='" + anons + '\'' +
+                ", fullText='" + fullText + '\'' +
+                ", views=" + views +
+                '}';
+    }
 }
