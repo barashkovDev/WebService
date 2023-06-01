@@ -1,27 +1,28 @@
 package com.barashkov.demo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="post_type",
+        discriminatorType = DiscriminatorType.STRING)
 public class Post {
 
     public Post() {
     }
 
-    public Post(String title, String anons, String fullText) {
+    public Post(String title, String fullText) {
         this.title = title;
-        this.anons = anons;
         this.fullText = fullText;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String title, anons, fullText;
-    private int views;
+    protected Long id;
+
+    protected String title;
+
+    protected String fullText;
 
     public Long getId() {
         return id;
@@ -39,14 +40,6 @@ public class Post {
         this.title = title;
     }
 
-    public String getAnons() {
-        return anons;
-    }
-
-    public void setAnons(String anons) {
-        this.anons = anons;
-    }
-
     public String getFullText() {
         return fullText;
     }
@@ -55,22 +48,12 @@ public class Post {
         this.fullText = fullText;
     }
 
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
-    }
-
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", anons='" + anons + '\'' +
                 ", fullText='" + fullText + '\'' +
-                ", views=" + views +
                 '}';
     }
 }

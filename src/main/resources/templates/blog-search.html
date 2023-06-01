@@ -9,14 +9,11 @@
 <header th:insert="~{blocks/header :: header}"></header>
 
 <div class="container mt-5">
-    <h1>Блог сайта</h1>
-    <div th:each="element : ${post}" class="alert alert-info mt-2">
+    <h2>Поиск по тэгу: <span th:text="${tag}"/></h2>
+    <div th:each="element : ${searchByTagPosts}" class="alert alert-info mt-2">
         <h3 th:text="${element.title}"/>
-        <p th:text="${element.fullText}"/>
-        <a th:href="'/blog/' + ${element.id} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
-        <form th:action="'/blog/' + ${element.id} + '/remove'" method="post">
-            <button class="btn btn-warning" type="submit">Удалить</button>
-        </form>
+        <a class="btn btn-primary btn-sm" th:href="'/blog/search=' + ${element.tag}" th:text="${element.tag}"/><br><br>
+        <a th:href="'/blog/' + ${element.id}" class="btn btn-warning">Детальнее</a>
     </div>
 </div>
 <div th:insert="~{blocks/footer :: footer}"></div>
